@@ -4,8 +4,8 @@ from django.contrib import messages
 from datetime import datetime
 
 # Create your views here.
-def index(request):
-    return render(request,"index.html")
+def homepage(request):
+    return render(request,"homepage.html")
 
 def about(request):
     return render(request,"about.html")
