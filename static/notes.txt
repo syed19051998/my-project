@@ -1,0 +1,60 @@
+* django-admin startproject hello - project created with the hello name
+
+* python manage.py runserver - to start the server with local host
+
+* python manage.py startapp home - To start the app which we created in project
+
+------------------------------------
+
+* python manage.py makemigrations - This command will check whether any schemas had changed in the database.
+
+* python manage.py migrate - stable authentication table in Django
+
+
+---------------------
+
+
+After making website using creating html files like(home, about, contact(with forms)) have to register the Model and App.
+
+#when giving submit button, the data needs to be stored so we have to register a model and app
+
+Example of creating Models in model.py when ever the form is submitted from contact page.
+class Contact(models.Model):
+    name = models.CharField(max_length=122)
+    email = models.CharField(max_length=122)
+    phone = models.CharField(max_length=13)
+    desc = models.CharField(max_length=200)
+    date = models.DateField()
+
+
+Now this created model has to be registered in Admin. So register like this in Admin.py
+
+from home.models import Contact
+# Register your models here.
+admin.site.register(Contact)
+
+* Then from apps.py copy the class name Homeconfig and paste it in settings.py file in Installed apps list, E.x
+INSTALLED_APPS = [
+    'home.apps.HomeConfig',
+    'django.contrib.admin',
+
+-------------------------------------
+
+makemigrations - create changes and store in a file
+migrate - apply the pending changes created by makemigration
+
+---------------------------------------
+
+TO ACCESS DATABASE - open an terminal and run python manage.py shell
+
+so now, you will be in the shell terminal
+
+example - I can use as -
+>>  from home.models import contact
+>>  Contact.objects.all() - it will list down all contacts from database
+>>  Contact.objects.all()[0] - it will give the first I'd
+>>  Contact.objects.all()[0].name/email/phonenumber/desc - it will give the first Id's name/email/phonenumber/desc
+
+FOR FILTER,
+>>Contact.objects.filter(name="name") - it will filter out and give the all names which has same "name" in database
+

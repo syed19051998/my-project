@@ -16,11 +16,16 @@ def services(request):
 def contact(request):
     if request.method == "POST":
         name = request.POST.get('name')
+        if not name:
+            return HttpResponse("Name field is required!", status=400)
+
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         desc = request.POST.get('desc')
-        contact = Contact(name=name, email=email,phone=phone, desc=desc, date=datetime.today())
+
+        # Save to database
+        contact = Contact(name=name, email=email, phone=phone, desc=desc, date=datetime.today())
         contact.save()
         messages.success(request, "Your Request is submitted!")
 
-    return render(request,"contact.html")
+    return render(request, "contact.html")
